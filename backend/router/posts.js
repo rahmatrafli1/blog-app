@@ -4,7 +4,8 @@ import loginController from "../controller/loginController.js";
 
 const postRoutes = Router();
 
-postRoutes.get("/", postController.getAll);
+postRoutes.get("/", postController.getAllPosting);
+postRoutes.get("/all", loginController.cektoken, postController.getAll);
 postRoutes.get("/:id", postController.getById);
 postRoutes.post("/", loginController.cektoken, postController.addPost);
 postRoutes.put("/:id", loginController.cektoken, postController.editPost);

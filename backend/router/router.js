@@ -6,6 +6,7 @@ import registerRoutes from "./register.js";
 import logoutRoutes from "./logout.js";
 import { refreshToken } from "../controller/refreshToken.js";
 import postRoutes from "./posts.js";
+import contactRoutes from "./contact.js";
 
 const router = Router();
 
@@ -20,5 +21,6 @@ router.use("/register", registerRoutes);
 router.use("/logout", logoutRoutes);
 router.get("/token", refreshToken);
 router.use("/posts", postRoutes);
+router.use("/contact", contactRoutes);
 
 export default router;

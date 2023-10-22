@@ -22,10 +22,12 @@ class registerController {
 
         res.send(errorHandling(result, 201, "Berhasil daftar!"));
       } else {
-        res.send(errorHandling("Error!", 400, "Password anda tidak cocok!"));
+        res.status(400).json({ message: "Password anda tidak cocok!" });
+        // res.send(errorHandling("Error!", 400, "Password anda tidak cocok!"));
       }
     } catch (error) {
-      res.send(errorHandling("Error!", 500, error.message));
+      res.status(500).json({ message: error.message });
+      // res.send(errorHandling("Error!", 500, error.message));
     }
   }
 }

@@ -4,7 +4,7 @@ import path from "path";
 import fs from "fs";
 
 class postController {
-  static async getAll(req, res) {
+  static async getAllPosting(req, res) {
     try {
       const result = await models.posts.findAll({
         include: {
@@ -14,6 +14,24 @@ class postController {
           required: true,
         },
         where: { posting: true },
+        order: [["id", "ASC"]],
+      });
+
+      res.send(errorHandling(result, 200, "Berhasil menampilkan Posts!"));
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+
+  static async getAll(req, res) {
+    try {
+      const result = await models.posts.findAll({
+        include: {
+          model: models.users,
+          as: "user",
+          attributes: ["name"],
+          required: true,
+        },
         order: [["id", "ASC"]],
       });
 

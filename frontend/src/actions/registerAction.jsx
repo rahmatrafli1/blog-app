@@ -21,7 +21,7 @@ export const RegisterUser = (data) => {
       data: data,
     })
       .then((res) => {
-        // console.log(res.data);
+        // console.log(res.data.message);
         dispatch({
           type: POST_REGISTER,
           payload: {
@@ -32,14 +32,14 @@ export const RegisterUser = (data) => {
         });
         Swal.fire("Sukses", res.data.message, "success");
       })
-      .catch((err) => {
+      .catch((res) => {
         // console.log(err.message);
         dispatch({
           type: POST_REGISTER,
           payload: {
             loading: false,
             data: false,
-            errorMessage: err.message,
+            errorMessage: res.data.message,
           },
         });
       });

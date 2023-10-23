@@ -18,17 +18,17 @@ const Login = () => {
         password: password,
       })
     );
-    navigate("/");
+    navigate("/post");
   };
   return (
     <>
-      <h2 className="text-2xl font-bold text-center py-6">Login</h2>
+      <h2 className="py-6 text-2xl font-bold text-center">Login</h2>
       <form
         onSubmit={Auth}
         className="shadow-xl px-2 py-2 md:w-[800px] sm:w-[400px] mx-auto bg-black text-white rounded-lg"
       >
         <div className="px-2 py-2">
-          <div className="font-bold py-2">
+          <div className="py-2 font-bold">
             <label>Username</label>
           </div>
           <input
@@ -36,23 +36,23 @@ const Login = () => {
             name="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="rounded w-full text-black"
+            className="w-full text-black rounded"
           />
         </div>
         <div className="px-2 py-2">
-          <div className="font-bold py-2">
+          <div className="py-2 font-bold">
             <label>Password</label>
           </div>
           <input
             type="password"
             name="password"
-            className="rounded w-full text-black"
+            className="w-full text-black rounded"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="px-2 py-2">
-          <button className="bg-green-600 text-white py-2 px-5 rounded-lg flex items-center ">
+          <button className="flex items-center px-5 py-2 text-white bg-green-600 rounded-lg ">
             <AiOutlineLogin /> Login
           </button>
         </div>

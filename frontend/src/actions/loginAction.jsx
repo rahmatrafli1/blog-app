@@ -20,18 +20,18 @@ export const loginUser = (data) => {
       data: data,
     })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data.data);
         dispatch({
           type: POST_LOGIN,
           payload: {
             loading: false,
-            data: res.data,
+            data: res.data.data,
             errorMessage: false,
           },
         });
       })
       .catch((err) => {
-        console.log(err.message);
+        // console.log(err.message);
         dispatch({
           type: POST_LOGIN,
           payload: {

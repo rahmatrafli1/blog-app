@@ -44,15 +44,18 @@ class loginController {
           });
           res.send(errorHandling(token, 200, "Berhasil Login!"));
         } else {
-          res.send(errorHandling("Error!!!", 400, "Password anda salah!"));
+          // res.send(errorHandling("Error!!!", 400, "Password anda salah!"));
+          res.status(400).json({ message: "Password anda salah!" });
         }
       } else {
         res.send(
-          errorHandling("Error!!!", 404, "Username anda tidak terdaftar!")
+          // errorHandling("Error!!!", 404, "Username anda tidak terdaftar!")
+          res.status(404).json({ message: "Username anda tidak terdaftar!" })
         );
       }
     } catch (error) {
-      res.send(errorHandling("Error!!!", 500, error.message));
+      // res.send(errorHandling("Error!!!", 500, error.message));
+      res.status(500).json({ message: error.message });
     }
   }
 
@@ -63,23 +66,25 @@ class loginController {
       if (token) {
         jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
           if (err)
-            return res.send(
-              errorHandling("Error!", 403, "Tidak bisa diakses!")
-            );
+            // return res.send(
+            //   errorHandling("Error!", 403, "Tidak bisa diakses!")
+            // );
+            res.status(403).json({ message: "Tidak bisa diakses!" });
           req.username = decoded.username;
           next();
         });
       } else {
-        res.send(
-          errorHandling(
-            "Error!",
-            401,
-            "Tidak bisa masuk ke halaman ini. karena anda belum login."
-          )
-        );
+        // res.send(
+        //   errorHandling(
+        //     "Error!",
+        //     401,
+        //     "Tidak bisa masuk ke halaman ini. karena anda belum login."
+        //   )
+        // );
+        res.status(401).json({ message: "Tidak authorisasi!" });
       }
     } catch (error) {
-      res.send(errorHandling("Error!!!", 500, error.message));
+      res.status(500).json({ message: error.message });
     }
   }
 }

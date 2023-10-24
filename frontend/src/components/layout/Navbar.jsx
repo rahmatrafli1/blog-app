@@ -5,10 +5,12 @@ import { BsInfoCircle, BsList } from "react-icons/bs";
 import {
   AiOutlineClose,
   AiOutlineHome,
-  AiOutlineLogout,
   AiOutlineUserAdd,
 } from "react-icons/ai";
+import { BiLogOut } from "react-icons/bi";
 import { MdLogin, MdOutlineLocalPostOffice } from "react-icons/md";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   let links = [
@@ -18,10 +20,20 @@ const Navbar = () => {
     { name: "Post", link: "/post", icon: <MdOutlineLocalPostOffice /> },
     { name: "Login", link: "/login", icon: <MdLogin /> },
     { name: "Register", link: "/register", icon: <AiOutlineUserAdd /> },
-    { name: "Logout", link: "/logout", icon: <AiOutlineLogout /> },
   ];
 
   const [open, setOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const Logout = async () => {
+    try {
+      await axios.delete("http://localhost:3000/logout");
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="sticky w-full shadow-md">
       <div className="items-center justify-between py-4 text-white bg-black md:flex md:px-10 px-7">
@@ -54,6 +66,14 @@ const Navbar = () => {
               </Link>
             </li>
           ))}
+          <li>
+            <button
+              onClick={Logout}
+              className="flex items-center px-3 py-3 text-center text-white duration-300 bg-red-600 rounded lg:mx-2 hover:bg-white hover:text-red-600"
+            >
+              <BiLogOut className="mr-2" /> Logout
+            </button>
+          </li>
         </ul>
       </div>
     </div>

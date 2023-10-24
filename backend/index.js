@@ -7,7 +7,7 @@ import router from "./router/router.js";
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ credentials: true, origin: "http://localhost:3001" }));
 
 app.use(cookieParser());
 

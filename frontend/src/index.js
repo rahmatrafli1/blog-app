@@ -6,6 +6,9 @@ import { createStore, compose, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import reducers from "./reducers";
+import axios from "axios";
+
+axios.defaults.withCredentials = true;
 
 const store = createStore(
   reducers,

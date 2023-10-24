@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineUserAdd } from "react-icons/ai";
-// import { RegisterUser } from "../../../actions/registerAction";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const Register = () => {
+export const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -15,9 +13,7 @@ const Register = () => {
   const [msg, setMsg] = useState("");
 
   // const { PostRegisterError } = useSelector((state) => state.PostReducer);
-
   // const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const RegisterSubmit = async (e) => {
@@ -135,5 +131,3 @@ const Register = () => {
     </>
   );
 };
-
-export default Register;

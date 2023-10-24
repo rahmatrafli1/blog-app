@@ -1,24 +1,36 @@
 import React, { useState } from "react";
 import { AiOutlineLogin } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { loginUser } from "../../../actions/loginAction";
+// import { useDispatch } from "react-redux";
+// import { loginUser } from "../../../actions/loginAction";
+import axios from "axios";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
-  const Auth = (e) => {
+  // const dispatch = useDispatch();
+  const Auth = async (e) => {
     e.preventDefault();
-    dispatch(
-      loginUser({
+    try {
+      await axios.post("http://localhost:3000/login", {
         username: username,
         password: password,
-      })
-    );
-    navigate("/post");
+      });
+      navigate("/post");
+    } catch (error) {
+      if (error.response) {
+        setMsg(error.response.data.message);
+      }
+    }
+    // dispatch(
+    //   loginUser({
+    //     username: username,
+    //     password: password,
+    //   })
+    // );
   };
   return (
     <>
@@ -27,6 +39,7 @@ const Login = () => {
         onSubmit={Auth}
         className="shadow-xl px-2 py-2 md:w-[800px] sm:w-[400px] mx-auto bg-black text-white rounded-lg"
       >
+        <p className="text-center text-white">{msg}</p>
         <div className="px-2 py-2">
           <div className="py-2 font-bold">
             <label>Username</label>
